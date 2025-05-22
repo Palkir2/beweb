@@ -3,37 +3,44 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
-import { useAuth } from "@/hooks/useAuth";
 
 export default function Login() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-  const { login } = useAuth();
   const { toast } = useToast();
-
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      await login.mutateAsync(formData);
-      toast({
-        title: "Anmeldung erfolgreich",
-        description: "Sie sind jetzt eingeloggt.",
-      });
-    } catch (error) {
-      toast({
-        title: "Anmeldung fehlgeschlagen",
-        description: "Ungültiger Benutzername oder Passwort. Bitte versuchen Sie es erneut.",
-        variant: "destructive",
-      });
+    
+    // Admin-Anmeldung prüfen
+    if (formData.username === "Admin" && formData.password === "123456") {
+      const adminUser = { username: formData.username, role: "admin" };
+      localStorage.setItem('currentUser', JSON.stringify(adminUser));
+      window.location.href = '/';
+      return;
     }
+    
+    // Standard-Benutzer-Anmeldung
+    if (formData.password.length >= 5) {
+      const regularUser = { username: formData.username, role: "user" };
+      localStorage.setItem('currentUser', JSON.stringify(regularUser));
+      window.location.href = '/';
+      return;
+    }
+    
+    // Fehlerfall
+    toast({
+      title: "Anmeldung fehlgeschlagen",
+      description: "Ungültiger Benutzername oder Passwort. Bitte versuchen Sie es erneut.",
+      variant: "destructive",
+    });
   };
 
   return (
@@ -79,9 +86,8 @@ export default function Login() {
             <Button
               type="submit"
               className="w-full"
-              disabled={login.isPending}
             >
-              {login.isPending ? "Anmeldung..." : "Anmelden"}
+              Anmelden
             </Button>
           </div>
         </form>

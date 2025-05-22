@@ -50,11 +50,12 @@ export class MemStorage implements IStorage {
     const id = this.userId++;
     const newUser: User = {
       id,
-      ...userData,
+      username: userData.username,
+      password: userData.password,
+      email: userData.email || null,
       role: userData.role || "user",
       status: userData.status || "active",
-      createdAt: new Date().toISOString(),
-      email: userData.email || null
+      createdAt: null
     };
     this.users.set(id, newUser);
     return newUser;

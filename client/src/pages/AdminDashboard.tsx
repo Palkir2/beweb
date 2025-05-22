@@ -1,13 +1,36 @@
 import { useState, useEffect } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { AdminLayout } from "@/components/AdminLayout";
 import { UserModal } from "@/components/UserModal";
 import { DeleteConfirmationModal } from "@/components/DeleteConfirmationModal";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { queryClient, apiRequest } from "@/lib/queryClient";
-import { User, InsertUser, Application } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
+
+// Typdefinitionen für die lokale Speicherung
+interface User {
+  id: number;
+  username: string;
+  email: string | null;
+  role: string;
+  status: string;
+}
+
+interface InsertUser {
+  username: string;
+  password: string;
+  email?: string | null;
+  role?: string;
+  status?: string;
+}
+
+interface Application {
+  id: number;
+  username: string;
+  userId: number;
+  content: string;
+  status: string;
+  createdAt: string;
+}
 
 export default function AdminDashboard() {
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);

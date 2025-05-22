@@ -16,7 +16,7 @@ export const users = pgTable("users", {
 export const insertUserSchema = createInsertSchema(users, {
   username: z.string().min(3).max(50),
   password: z.string().min(6),
-  email: z.string().email().optional(),
+  email: z.string().email().optional().nullable(),
   role: z.enum(["user", "admin"]).default("user").optional(),
   status: z.enum(["active", "inactive"]).default("active").optional(),
 }).omit({ id: true, createdAt: true });
@@ -31,7 +31,7 @@ export const applications = pgTable("applications", {
   username: text("username").notNull(),
   content: text("content").default(""),
   status: text("status").default("pending").notNull(),
-  createdAt: text("created_at").default(() => new Date().toISOString()),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 
 export const insertApplicationSchema = createInsertSchema(applications, {

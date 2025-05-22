@@ -4,10 +4,31 @@ import NotFound from "@/pages/not-found";
 import Login from "@/pages/Login";
 import AdminDashboard from "@/pages/AdminDashboard";
 import ApplicationForm from "@/pages/ApplicationForm";
-import { useAuth } from "@/hooks/useAuth";
+import { useState, useEffect } from "react";
 
 function Router() {
-  const { user, isLoading } = useAuth();
+  // Vereinfachte Authentifizierungslogik für Demonstrationszwecke
+  const [user, setUser] = useState<{role: string} | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Prüfen, ob ein Benutzer im localStorage gespeichert ist
+  useEffect(() => {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+    setIsLoading(false);
+  }, []);
+
+  // Funktion zum Ausloggen
+  const handleLogout = () => {
+    localStorage.removeItem('currentUser');
+    setUser(null);
+    window.location.href = '/';
+  };
+
+  // Logout-Funktion global verfügbar machen
+  (window as any).logout = handleLogout;
 
   if (isLoading) {
     return (
