@@ -1,16 +1,13 @@
-import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { LogOut } from "lucide-react";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
 export function AdminLayout({ children }: AdminLayoutProps) {
-  const { user, logout } = useAuth();
-
-  const handleLogout = async () => {
-    await logout.mutateAsync();
+  const handleLogout = () => {
+    localStorage.removeItem('currentUser');
+    window.location.href = '/';
   };
 
   return (
@@ -19,15 +16,14 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <h1 className="text-xl font-semibold text-white">Admin Dashboard</h1>
           <div className="flex items-center space-x-4">
-            <span className="text-white text-sm">{user?.username}</span>
+            <span className="text-white text-sm">Admin</span>
             <Button
               variant="ghost"
               size="sm"
               className="text-white hover:text-gray-200 hover:bg-primary-dark font-medium p-0"
               onClick={handleLogout}
             >
-              <LogOut className="h-4 w-4 mr-1" />
-              Logout
+              Abmelden
             </Button>
           </div>
         </div>
@@ -36,6 +32,12 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {children}
       </main>
+      
+      <footer className="bg-white shadow-inner py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+          &copy; {new Date().getFullYear()} Bewerbungsportal
+        </div>
+      </footer>
     </div>
   );
 }

@@ -36,78 +36,55 @@ export default function AdminDashboard() {
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | undefined>(undefined);
+  const [users, setUsers] = useState<User[]>([]);
+  const [applications, setApplications] = useState<Application[]>([]);
+  const [isLoadingUsers, setIsLoadingUsers] = useState(false);
+  const [isLoadingApplications, setIsLoadingApplications] = useState(false);
   const { toast } = useToast();
 
-  const { data: users, isLoading: isLoadingUsers } = useQuery<User[]>({
-    queryKey: ["/api/users"],
-  });
+  // Beispiel-Benutzer und -Bewerbungen laden
+  useEffect(() => {
+    // Beispiel-Benutzer für die Demo
+    setUsers([
+      { id: 1, username: "Admin", email: "admin@example.com", role: "admin", status: "active" },
+      { id: 2, username: "MaxMustermann", email: "max@example.com", role: "user", status: "active" },
+      { id: 3, username: "EvaSchmidt", email: "eva@example.com", role: "user", status: "active" }
+    ]);
 
-  const { data: applications, isLoading: isLoadingApplications } = useQuery<Application[]>({
-    queryKey: ["/api/applications"],
-  });
+    // Beispiel-Bewerbungen für die Demo
+    setApplications([
+      { 
+        id: 1, 
+        userId: 2, 
+        username: "MaxMustermann", 
+        content: "Ich bewerbe mich für die Position als Web-Entwickler.", 
+        status: "pending", 
+        createdAt: new Date().toISOString() 
+      },
+      { 
+        id: 2, 
+        userId: 3, 
+        username: "EvaSchmidt", 
+        content: "Bewerbung als UX Designer mit 3 Jahren Erfahrung.", 
+        status: "approved", 
+        createdAt: new Date().toISOString() 
+      }
+    ]);
+  }, []);
 
-  const createUser = useMutation({
-    mutationFn: async (user: InsertUser) => {
-      const res = await apiRequest("POST", "/api/users", user);
-      return res.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/users"] });
-      toast({
-        title: "Success",
-        description: "User has been created successfully",
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: "Error",
-        description: `Failed to create user: ${error}`,
-        variant: "destructive",
-      });
-    },
-  });
-
-  const updateUser = useMutation({
-    mutationFn: async (user: User) => {
-      const res = await apiRequest("PUT", `/api/users/${user.id}`, user);
-      return res.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/users"] });
-      toast({
-        title: "Success",
-        description: "User has been updated successfully",
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: "Error",
-        description: `Failed to update user: ${error}`,
-        variant: "destructive",
-      });
-    },
-  });
-
-  const deleteUser = useMutation({
-    mutationFn: async (userId: number) => {
-      const res = await apiRequest("DELETE", `/api/users/${userId}`, {});
-      return res.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/users"] });
-      toast({
-        title: "Success",
-        description: "User has been deleted successfully",
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: "Error",
-        description: `Failed to delete user: ${error}`,
-        variant: "destructive",
-      });
-    },
-  });
+  // Logout-Funktion
+  const handleLogout = () => {
+    if (window.logout) {
+      (window as any).logout();
+    } else {
+      localStorage.removeItem('currentUser');
+      window.location.href = '/';
+    }
+    toast({
+      title: "Abgemeldet",
+      description: "Sie wurden erfolgreich abgemeldet.",
+    });
+  };
 
   const handleOpenAddUserModal = () => {
     setSelectedUser(undefined);
@@ -126,16 +103,41 @@ export default function AdminDashboard() {
 
   const handleSaveUser = (userData: InsertUser & { id?: number }) => {
     if (userData.id) {
-      updateUser.mutate(userData as User);
+      // Benutzer aktualisieren
+      const updatedUsers = users.map(u => 
+        u.id === userData.id ? { ...u, ...userData } as User : u
+      );
+      setUsers(updatedUsers);
+      toast({
+        title: "Erfolg",
+        description: "Benutzer wurde erfolgreich aktualisiert",
+      });
     } else {
-      createUser.mutate(userData);
+      // Neuen Benutzer erstellen
+      const newUser: User = {
+        id: Math.max(0, ...users.map(u => u.id)) + 1,
+        username: userData.username,
+        email: userData.email || null,
+        role: userData.role || "user",
+        status: userData.status || "active"
+      };
+      setUsers([...users, newUser]);
+      toast({
+        title: "Erfolg",
+        description: "Benutzer wurde erfolgreich erstellt",
+      });
     }
     setIsUserModalOpen(false);
   };
 
   const handleDeleteUser = () => {
     if (selectedUser) {
-      deleteUser.mutate(selectedUser.id);
+      setUsers(users.filter(u => u.id !== selectedUser.id));
+      setIsDeleteModalOpen(false);
+      toast({
+        title: "Erfolg",
+        description: "Benutzer wurde erfolgreich gelöscht",
+      });
     }
   };
 
