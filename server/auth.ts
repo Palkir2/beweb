@@ -19,6 +19,7 @@ export const sessionMiddleware = session({
     secure: false, // Set to false to allow HTTP during development
     sameSite: 'lax'
   },
+  name: "bewerbungsportal.sid"
 });
 
 // Middleware to check if user is authenticated

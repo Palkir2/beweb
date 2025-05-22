@@ -8,6 +8,8 @@ import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Apply session middleware
+  app.use(sessionMiddleware);
   // Auth routes
   app.post("/api/auth/login", async (req, res) => {
     try {

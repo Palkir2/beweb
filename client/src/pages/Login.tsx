@@ -1,15 +1,90 @@
-import { LoginForm } from "@/components/LoginForm";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Login() {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+  const { login } = useAuth();
+  const { toast } = useToast();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await login.mutateAsync(formData);
+      toast({
+        title: "Anmeldung erfolgreich",
+        description: "Sie sind jetzt eingeloggt.",
+      });
+    } catch (error) {
+      toast({
+        title: "Anmeldung fehlgeschlagen",
+        description: "Ungültiger Benutzername oder Passwort. Bitte versuchen Sie es erneut.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="login-container min-h-screen flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-semibold text-primary-dark mb-2">Application Portal</h1>
-          <p className="text-gray-500 text-sm">Please sign in to continue</p>
+          <h1 className="text-2xl font-semibold text-primary-dark mb-2">Bewerbungsportal</h1>
+          <p className="text-gray-500 text-sm">Bitte melden Sie sich an, um fortzufahren</p>
         </div>
         
-        <LoginForm />
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <Label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
+              Benutzername
+            </Label>
+            <Input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+              className="w-full"
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              Passwort
+            </Label>
+            <Input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="w-full"
+            />
+          </div>
+
+          <div>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={login.isPending}
+            >
+              {login.isPending ? "Anmeldung..." : "Anmelden"}
+            </Button>
+          </div>
+        </form>
         
         <div className="mt-6">
           <div className="relative">
@@ -17,7 +92,7 @@ export default function Login() {
               <div className="w-full border-t border-gray-300"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Or continue with</span>
+              <span className="px-2 bg-white text-gray-500">Oder weiter mit</span>
             </div>
           </div>
           

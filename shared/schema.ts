@@ -31,7 +31,7 @@ export const applications = pgTable("applications", {
   username: text("username").notNull(),
   content: text("content").default(""),
   status: text("status").default("pending").notNull(),
-  createdAt: timestamp("created_at").defaultNow(),
+  createdAt: text("created_at").default(() => new Date().toISOString()),
 });
 
 export const insertApplicationSchema = createInsertSchema(applications, {

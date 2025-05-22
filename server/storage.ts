@@ -53,6 +53,8 @@ export class MemStorage implements IStorage {
       ...userData,
       role: userData.role || "user",
       status: userData.status || "active",
+      createdAt: new Date().toISOString(),
+      email: userData.email || null
     };
     this.users.set(id, newUser);
     return newUser;
