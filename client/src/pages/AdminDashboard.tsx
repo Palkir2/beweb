@@ -252,257 +252,253 @@ export default function AdminDashboard() {
 
   return (
     <AdminLayout>
-      <div className="flex flex-col lg:flex-row gap-6">
-        {/* Seitenleiste mit Tabs im Raumschiff-Design - breiter gemacht */}
-        <div className="w-full lg:w-80 flex-shrink-0">
-          <div className="futuristic-panel p-2">
-            <Tabs 
-              defaultValue="users" 
-              orientation="vertical" 
-              className="w-full"
-              value={activeTab}
-              onValueChange={setActiveTab}
-            >
-              <TabsList className="w-full flex flex-col space-tabs">
-                <TabsTrigger value="users" className="flex-1 justify-start text-left space-tab py-4 px-6 text-base mb-1 border-l-2 border-l-transparent data-[state=active]:border-l-[#00d2ff]">
-                  Benutzerverwaltung
-                </TabsTrigger>
-                <TabsTrigger value="applications" className="flex-1 justify-start text-left space-tab py-4 px-6 text-base border-l-2 border-l-transparent data-[state=active]:border-l-[#00d2ff]">
-                  Aktuelle Bewerbungen
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
+      {/* Gemeinsames Panel für Navigation und Inhalt */}
+      <div className="futuristic-panel w-full relative">
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[rgba(0,210,255,0.5)] to-transparent"></div>
+        
+        <div className="flex flex-col lg:flex-row">
+          {/* Linke Navigationsleiste */}
+          <div className="lg:w-64 border-r border-[#00669c]/30">
+            <div className="p-3">
+              <Tabs 
+                defaultValue="users" 
+                orientation="vertical" 
+                className="w-full"
+                value={activeTab}
+                onValueChange={setActiveTab}
+              >
+                <TabsList className="w-full flex flex-col space-tabs">
+                  <TabsTrigger 
+                    value="users" 
+                    className="flex-1 justify-start text-left space-tab py-4 px-4 text-base mb-1 border-l-2 border-l-transparent data-[state=active]:border-l-[#00d2ff]"
+                  >
+                    Benutzerverwaltung
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="applications" 
+                    className="flex-1 justify-start text-left space-tab py-4 px-4 text-base border-l-2 border-l-transparent data-[state=active]:border-l-[#00d2ff]"
+                  >
+                    Aktuelle Bewerbungen
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </div>
           </div>
-        </div>
-
-        {/* Hauptinhalt */}
-        <div className="flex-1">
-          {activeTab === "users" ? (
-            <div>
-              <div className="mb-6 flex justify-between items-center">
-                <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] to-[#48b1d9]">Benutzerverwaltung</h2>
-                <Button 
-                  onClick={handleOpenAddUserModal} 
-                  className="futuristic-btn text-white"
-                >
-                  Benutzer hinzufügen
-                </Button>
-              </div>
-              
-              {/* User Table im Raumschiff-Design */}
-              <div className="futuristic-panel p-4 relative overflow-hidden mb-8">
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[rgba(0,210,255,0.5)] to-transparent"></div>
-                <table className="space-table w-full">
-                  <thead>
-                    <tr>
-                      <th className="w-1/5 text-left px-4">Benutzername</th>
-                      <th className="w-1/5 text-left px-4">E-Mail</th>
-                      <th className="w-1/5 text-left px-4">Rolle</th>
-                      <th className="w-1/5 text-left px-4">Status</th>
-                      <th className="w-1/5 text-right px-4">Aktionen</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {users && users.length > 0 ? (
-                      users.map((user) => (
-                        <tr key={user.id}>
-                          <td className="px-4">{user.username}</td>
-                          <td className="px-4">{user.email}</td>
-                          <td className="px-4">
-                            {user.role === "admin" ? "Administrator" : "Benutzer"}
-                          </td>
-                          <td className="px-4">
-                            {getStatusBadge(user.status)}
-                          </td>
-                          <td className="px-4 text-right">
-                            <Button 
-                              variant="ghost" 
-                              className="text-[#00d2ff] hover:text-[#c4f6ff] mr-3" 
-                              onClick={() => handleOpenEditUserModal(user)}
-                            >
-                              Bearbeiten
-                            </Button>
-                            {user.username !== "Admin" && (
+          
+          {/* Hauptinhalt */}
+          <div className="flex-1 p-4">
+            {activeTab === "users" ? (
+              <div>
+                <div className="mb-6 flex justify-between items-center">
+                  <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] to-[#48b1d9]">Benutzerverwaltung</h2>
+                  <Button 
+                    onClick={handleOpenAddUserModal} 
+                    className="futuristic-btn text-white"
+                  >
+                    Benutzer hinzufügen
+                  </Button>
+                </div>
+                
+                <div className="overflow-hidden">
+                  <table className="space-table w-full">
+                    <thead>
+                      <tr>
+                        <th className="w-1/5 text-left px-4">Benutzername</th>
+                        <th className="w-1/5 text-left px-4">E-Mail</th>
+                        <th className="w-1/5 text-left px-4">Rolle</th>
+                        <th className="w-1/5 text-left px-4">Status</th>
+                        <th className="w-1/5 text-right px-4">Aktionen</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {users && users.length > 0 ? (
+                        users.map((user) => (
+                          <tr key={user.id}>
+                            <td className="px-4">{user.username}</td>
+                            <td className="px-4">{user.email}</td>
+                            <td className="px-4">
+                              {user.role === "admin" ? "Administrator" : "Benutzer"}
+                            </td>
+                            <td className="px-4">
+                              {getStatusBadge(user.status)}
+                            </td>
+                            <td className="px-4 text-right">
                               <Button 
                                 variant="ghost" 
-                                className="text-red-400 hover:text-red-300" 
-                                onClick={() => handleOpenDeleteModal(user)}
+                                className="text-[#00d2ff] hover:text-[#c4f6ff] mr-3" 
+                                onClick={() => handleOpenEditUserModal(user)}
                               >
-                                Löschen
+                                Bearbeiten
                               </Button>
-                            )}
-                          </td>
+                              {user.username !== "Admin" && (
+                                <Button 
+                                  variant="ghost" 
+                                  className="text-red-400 hover:text-red-300" 
+                                  onClick={() => handleOpenDeleteModal(user)}
+                                >
+                                  Löschen
+                                </Button>
+                              )}
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={5} className="text-center">Keine Benutzer gefunden</td>
                         </tr>
-                      ))
-                    ) : (
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div className="mb-6">
+                  <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] to-[#48b1d9]">Aktuelle Bewerbungen</h2>
+                </div>
+                
+                <div className="overflow-hidden">
+                  <table className="space-table w-full">
+                    <thead>
                       <tr>
-                        <td colSpan={5} className="text-center">Keine Benutzer gefunden</td>
+                        <th className="w-1/5 text-left px-4">Bewerber</th>
+                        <th className="w-1/5 text-left px-4">Betreff</th>
+                        <th className="w-1/5 text-left px-4">Eingereicht am</th>
+                        <th className="w-1/5 text-left px-4">Status</th>
+                        <th className="w-1/5 text-right px-4">Aktionen</th>
                       </tr>
-                    )}
-                  </tbody>
-                </table>
-                <div className="absolute bottom-0 left-10 right-10 h-[1px] bg-gradient-to-r from-transparent via-[rgba(0,210,255,0.3)] to-transparent"></div>
-              </div>
-            </div>
-          ) : (
-            <div>
-              <div className="mb-6">
-                <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] to-[#48b1d9]">Aktuelle Bewerbungen</h2>
-              </div>
-              
-              {/* Application Table im Raumschiff-Design */}
-              <div className="futuristic-panel p-4 relative overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[rgba(0,210,255,0.5)] to-transparent"></div>
-                <table className="space-table w-full">
-                  <thead>
-                    <tr>
-                      <th className="w-1/5 text-left px-4">Bewerber</th>
-                      <th className="w-1/5 text-left px-4">Betreff</th>
-                      <th className="w-1/5 text-left px-4">Eingereicht am</th>
-                      <th className="w-1/5 text-left px-4">Status</th>
-                      <th className="w-1/5 text-right px-4">Aktionen</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {applications && applications.length > 0 ? (
-                      applications.map((application) => (
-                        <tr key={application.id}>
-                          <td>
-                            {application.fullName}
-                          </td>
-                          <td className="max-w-xs truncate">
-                            {application.title}
-                          </td>
-                          <td>
-                            {formatDate(application.submittedAt)}
-                          </td>
-                          <td>
-                            <Select
-                              defaultValue={application.status}
-                              onValueChange={(value: "pending" | "approved" | "rejected") => 
-                                handleUpdateApplicationStatus(application.id, value)
-                              }
-                            >
-                              <SelectTrigger className="w-[140px] bg-[#081018] border-[#00669c] text-[#c4f6ff]">
-                                <SelectValue />
-                              </SelectTrigger>
-                              <SelectContent className="bg-[#081018] border-[#00669c] text-[#c4f6ff]">
-                                <SelectItem value="pending" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">In Bearbeitung</SelectItem>
-                                <SelectItem value="approved" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">Angenommen</SelectItem>
-                                <SelectItem value="rejected" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">Abgelehnt</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </td>
-                          <td>
-                            <Button 
-                              variant="ghost" 
-                              className="text-[#00d2ff] hover:text-[#c4f6ff]"
-                              onClick={() => handleViewApplication(application)}
-                            >
-                              Ansehen
-                            </Button>
-                          </td>
+                    </thead>
+                    <tbody>
+                      {applications && applications.length > 0 ? (
+                        applications.map((application) => (
+                          <tr key={application.id}>
+                            <td className="px-4">
+                              {application.fullName}
+                            </td>
+                            <td className="px-4 max-w-xs truncate">
+                              {application.title}
+                            </td>
+                            <td className="px-4">
+                              {formatDate(application.submittedAt)}
+                            </td>
+                            <td className="px-4">
+                              <Select
+                                defaultValue={application.status}
+                                onValueChange={(value: "pending" | "approved" | "rejected") => 
+                                  handleUpdateApplicationStatus(application.id, value)
+                                }
+                              >
+                                <SelectTrigger className="w-[140px] bg-[#081018] border-[#00669c] text-[#c4f6ff]">
+                                  <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent className="bg-[#081018] border-[#00669c] text-[#c4f6ff]">
+                                  <SelectItem value="pending" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">In Bearbeitung</SelectItem>
+                                  <SelectItem value="approved" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">Angenommen</SelectItem>
+                                  <SelectItem value="rejected" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">Abgelehnt</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </td>
+                            <td className="px-4 text-right">
+                              <Button 
+                                variant="ghost" 
+                                className="text-[#00d2ff] hover:text-[#c4f6ff]"
+                                onClick={() => handleViewApplication(application)}
+                              >
+                                Ansehen
+                              </Button>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={5} className="text-center">Keine Bewerbungen gefunden</td>
                         </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan={5} className="text-center">Keine Bewerbungen gefunden</td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-                <div className="absolute bottom-0 left-10 right-10 h-[1px] bg-gradient-to-r from-transparent via-[rgba(0,210,255,0.3)] to-transparent"></div>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
-      
+
       {/* Modals */}
-      <UserModal
+      <UserModal 
         isOpen={isUserModalOpen}
         onClose={() => setIsUserModalOpen(false)}
         onSave={handleSaveUser}
         user={selectedUser}
       />
       
-      <DeleteConfirmationModal
+      <DeleteConfirmationModal 
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={handleDeleteUser}
       />
       
-      {/* Bewerbungs-Detail-Modal im Raumschiff-Design */}
       <Dialog open={isApplicationModalOpen} onOpenChange={setIsApplicationModalOpen}>
-        <DialogContent className="max-w-3xl space-dialog-content">
+        <DialogContent className="bg-[#081018] border-[#00669c] text-[#c4f6ff] max-w-4xl max-h-[90vh] overflow-auto">
           <DialogHeader>
-            <DialogTitle className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] to-[#48b1d9]">
+            <DialogTitle className="text-xl font-bold text-[#00d2ff]">
               {selectedApplication?.title}
             </DialogTitle>
-            <DialogDescription className="text-[#89c4d9]">
-              <span className="text-[#00d2ff]">DATENSATZ:</span> Eingereicht am {selectedApplication && formatDate(selectedApplication.submittedAt)}
+            <DialogDescription className="text-[#c4f6ff]/70">
+              Eingereicht von {selectedApplication?.fullName} am {selectedApplication && formatDate(selectedApplication.submittedAt)}
             </DialogDescription>
           </DialogHeader>
           
-          {selectedApplication && (
-            <div className="space-y-4 mt-4 futuristic-panel p-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-field">
-                  <h3 className="space-field-label">BESATZUNGSMITGLIED</h3>
-                  <p className="space-field-value">{selectedApplication.fullName}</p>
-                </div>
-                <div className="space-field">
-                  <h3 className="space-field-label">KOMMUNIKATIONSCODE</h3>
-                  <p className="space-field-value">{selectedApplication.email}</p>
-                </div>
-              </div>
-              
-              <div className="space-field">
-                <h3 className="space-field-label">STERNENDATUM</h3>
-                <p className="space-field-value">{selectedApplication.birthDate ? formatDate(selectedApplication.birthDate) : 'Nicht angegeben'}</p>
-              </div>
-              
-              <div className="space-field">
-                <h3 className="space-field-label">MISSIONSSTATUS</h3>
-                <div className="mt-2">
-                  <Select
-                    defaultValue={selectedApplication.status}
-                    onValueChange={(value: "pending" | "approved" | "rejected") => {
-                      handleUpdateApplicationStatus(selectedApplication.id, value);
-                      // Status auch im Modal aktualisieren
-                      setSelectedApplication({
-                        ...selectedApplication,
-                        status: value
-                      });
-                    }}
-                  >
-                    <SelectTrigger className="w-[200px] bg-[#081018] border-[#00669c] text-[#c4f6ff] glow-border">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="bg-[#081018] border-[#00669c] text-[#c4f6ff]">
-                      <SelectItem value="pending" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">In Bearbeitung</SelectItem>
-                      <SelectItem value="approved" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">Angenommen</SelectItem>
-                      <SelectItem value="rejected" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">Abgelehnt</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              
-              <div className="space-field">
-                <h3 className="space-field-label">MOTIVATIONSSCHREIBEN</h3>
-                <div className="mt-2 p-4 bg-[#0c1a2e] border border-[#00669c] rounded-sm whitespace-pre-line text-[#c4f6ff]">
-                  {selectedApplication.coverLetter}
-                </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 py-4">
+            <div>
+              <h3 className="text-sm font-medium mb-2 text-[#00d2ff]">Bewerberinformationen</h3>
+              <div className="space-y-2 text-sm">
+                <p><span className="text-[#c4f6ff]/70">Name:</span> {selectedApplication?.fullName}</p>
+                <p><span className="text-[#c4f6ff]/70">E-Mail:</span> {selectedApplication?.email}</p>
+                <p><span className="text-[#c4f6ff]/70">Geburtsdatum:</span> {selectedApplication?.birthDate ? formatDate(selectedApplication.birthDate) : 'Nicht angegeben'}</p>
               </div>
             </div>
-          )}
+            
+            <div>
+              <h3 className="text-sm font-medium mb-2 text-[#00d2ff]">Bewerbungsstatus</h3>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-sm">
+                  <span className="text-[#c4f6ff]/70">Status:</span>
+                  {selectedApplication && getStatusBadge(selectedApplication.status)}
+                </div>
+                <Select
+                  defaultValue={selectedApplication?.status}
+                  onValueChange={(value: "pending" | "approved" | "rejected") => 
+                    selectedApplication && handleUpdateApplicationStatus(selectedApplication.id, value)
+                  }
+                >
+                  <SelectTrigger className="w-[140px] bg-[#081018] border-[#00669c] text-[#c4f6ff]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[#081018] border-[#00669c] text-[#c4f6ff]">
+                    <SelectItem value="pending" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">In Bearbeitung</SelectItem>
+                    <SelectItem value="approved" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">Angenommen</SelectItem>
+                    <SelectItem value="rejected" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">Abgelehnt</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </div>
+          
+          <div className="py-4">
+            <h3 className="text-sm font-medium mb-2 text-[#00d2ff]">Anschreiben</h3>
+            <div className="mt-2 p-4 border border-[#00669c] rounded-sm bg-[#0c1a2e] text-[#c4f6ff] whitespace-pre-wrap">
+              {selectedApplication?.coverLetter}
+            </div>
+          </div>
           
           <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline" className="futuristic-btn text-white">
-                SCHLIESSEN
-              </Button>
-            </DialogClose>
+            <Button
+              variant="ghost"
+              onClick={() => setIsApplicationModalOpen(false)}
+              className="text-[#00d2ff] hover:text-[#c4f6ff] border border-[#00669c] mr-2"
+            >
+              Schließen
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
