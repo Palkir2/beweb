@@ -253,9 +253,9 @@ export default function AdminDashboard() {
   return (
     <AdminLayout>
       <div className="flex flex-col lg:flex-row gap-6">
-        {/* Seitenleiste mit Tabs im Raumschiff-Design */}
-        <div className="w-full lg:w-64 flex-shrink-0">
-          <div className="futuristic-panel">
+        {/* Seitenleiste mit Tabs im Raumschiff-Design - breiter gemacht */}
+        <div className="w-full lg:w-80 flex-shrink-0">
+          <div className="futuristic-panel p-2">
             <Tabs 
               defaultValue="users" 
               orientation="vertical" 
@@ -264,10 +264,10 @@ export default function AdminDashboard() {
               onValueChange={setActiveTab}
             >
               <TabsList className="w-full flex flex-row lg:flex-col space-tabs">
-                <TabsTrigger value="users" className="flex-1 lg:justify-start text-left space-tab">
+                <TabsTrigger value="users" className="flex-1 lg:justify-start text-left space-tab py-4 px-3 text-base">
                   Benutzerverwaltung
                 </TabsTrigger>
-                <TabsTrigger value="applications" className="flex-1 lg:justify-start text-left space-tab">
+                <TabsTrigger value="applications" className="flex-1 lg:justify-start text-left space-tab py-4 px-3 text-base">
                   Aktuelle Bewerbungen
                 </TabsTrigger>
               </TabsList>
@@ -432,37 +432,39 @@ export default function AdminDashboard() {
         onConfirm={handleDeleteUser}
       />
       
-      {/* Bewerbungs-Detail-Modal */}
+      {/* Bewerbungs-Detail-Modal im Raumschiff-Design */}
       <Dialog open={isApplicationModalOpen} onOpenChange={setIsApplicationModalOpen}>
-        <DialogContent className="max-w-3xl">
+        <DialogContent className="max-w-3xl space-dialog-content">
           <DialogHeader>
-            <DialogTitle>{selectedApplication?.title}</DialogTitle>
-            <DialogDescription>
-              Eingereicht am {selectedApplication && formatDate(selectedApplication.submittedAt)}
+            <DialogTitle className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] to-[#48b1d9]">
+              {selectedApplication?.title}
+            </DialogTitle>
+            <DialogDescription className="text-[#89c4d9]">
+              <span className="text-[#00d2ff]">DATENSATZ:</span> Eingereicht am {selectedApplication && formatDate(selectedApplication.submittedAt)}
             </DialogDescription>
           </DialogHeader>
           
           {selectedApplication && (
-            <div className="space-y-4 mt-4">
+            <div className="space-y-4 mt-4 futuristic-panel p-4">
               <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <h3 className="text-sm font-medium text-gray-500">Name</h3>
-                  <p>{selectedApplication.fullName}</p>
+                <div className="space-field">
+                  <h3 className="space-field-label">BESATZUNGSMITGLIED</h3>
+                  <p className="space-field-value">{selectedApplication.fullName}</p>
                 </div>
-                <div>
-                  <h3 className="text-sm font-medium text-gray-500">E-Mail</h3>
-                  <p>{selectedApplication.email}</p>
+                <div className="space-field">
+                  <h3 className="space-field-label">KOMMUNIKATIONSCODE</h3>
+                  <p className="space-field-value">{selectedApplication.email}</p>
                 </div>
               </div>
               
-              <div>
-                <h3 className="text-sm font-medium text-gray-500">Geburtsdatum</h3>
-                <p>{selectedApplication.birthDate ? formatDate(selectedApplication.birthDate) : 'Nicht angegeben'}</p>
+              <div className="space-field">
+                <h3 className="space-field-label">STERNENDATUM</h3>
+                <p className="space-field-value">{selectedApplication.birthDate ? formatDate(selectedApplication.birthDate) : 'Nicht angegeben'}</p>
               </div>
               
-              <div>
-                <h3 className="text-sm font-medium text-gray-500">Status</h3>
-                <div className="mt-1">
+              <div className="space-field">
+                <h3 className="space-field-label">MISSIONSSTATUS</h3>
+                <div className="mt-2">
                   <Select
                     defaultValue={selectedApplication.status}
                     onValueChange={(value: "pending" | "approved" | "rejected") => {
@@ -474,21 +476,21 @@ export default function AdminDashboard() {
                       });
                     }}
                   >
-                    <SelectTrigger className="w-[200px]">
+                    <SelectTrigger className="w-[200px] bg-[#081018] border-[#00669c] text-[#c4f6ff] glow-border">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="pending">In Bearbeitung</SelectItem>
-                      <SelectItem value="approved">Angenommen</SelectItem>
-                      <SelectItem value="rejected">Abgelehnt</SelectItem>
+                    <SelectContent className="bg-[#081018] border-[#00669c] text-[#c4f6ff]">
+                      <SelectItem value="pending" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">In Bearbeitung</SelectItem>
+                      <SelectItem value="approved" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">Angenommen</SelectItem>
+                      <SelectItem value="rejected" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">Abgelehnt</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
               
-              <div>
-                <h3 className="text-sm font-medium text-gray-500">Anschreiben</h3>
-                <div className="mt-2 p-4 bg-gray-50 rounded-md whitespace-pre-line">
+              <div className="space-field">
+                <h3 className="space-field-label">MOTIVATIONSSCHREIBEN</h3>
+                <div className="mt-2 p-4 bg-[#0c1a2e] border border-[#00669c] rounded-sm whitespace-pre-line text-[#c4f6ff]">
                   {selectedApplication.coverLetter}
                 </div>
               </div>
@@ -497,7 +499,9 @@ export default function AdminDashboard() {
           
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Schließen</Button>
+              <Button variant="outline" className="futuristic-btn text-white">
+                SCHLIESSEN
+              </Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>

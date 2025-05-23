@@ -72,12 +72,24 @@ export function UserLayout({ children }: UserLayoutProps) {
         </div>
       </main>
       
-      {/* Footer mit Raumschiff-Stil */}
+      {/* Footer mit Raumschiff-Stil und Datenschutz-Link */}
       <footer className="relative">
         <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#00d2ff]/30 to-transparent"></div>
         <div className="futuristic-panel py-3">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-[#48b1d9] text-sm">
-            SYSTEM-ID: RS-{new Date().getFullYear()}-BRWRBNGSPRJKT
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-2">
+            <div className="text-[#48b1d9] text-sm">
+              SYSTEM-ID: RS-{new Date().getFullYear()}-BRWRBNGSPRJKT
+            </div>
+            <div>
+              <a 
+                href="https://palkirzwei.de/datenschutz" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-[#00d2ff] hover:text-[#c4f6ff] text-sm border-b border-[#00669c] pb-px hover:border-[#00d2ff] transition-colors"
+              >
+                Datenschutzerklärung
+              </a>
+            </div>
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[rgba(0,210,255,0.6)] to-transparent"></div>
