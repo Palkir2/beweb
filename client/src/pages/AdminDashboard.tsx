@@ -348,22 +348,26 @@ export default function AdminDashboard() {
                             <td className="px-4">
                               {getStatusBadge(user.status)}
                             </td>
-                            <td className="px-4 text-right">
-                              <Button 
-                                variant="ghost" 
-                                className="text-[#00d2ff] hover:text-[#c4f6ff] mr-3" 
-                                onClick={() => handleOpenEditUserModal(user)}
-                              >
-                                Bearbeiten
-                              </Button>
-                              {user.username !== "Admin" && (
+                            <td className="px-4 flex justify-end space-x-2">
+                              <div className="flex items-center">
                                 <Button 
                                   variant="ghost" 
-                                  className="text-red-400 hover:text-red-300" 
-                                  onClick={() => handleOpenDeleteModal(user)}
+                                  className="text-[#00d2ff] hover:text-[#c4f6ff] w-24 text-center" 
+                                  onClick={() => handleOpenEditUserModal(user)}
                                 >
-                                  Löschen
+                                  Bearbeiten
                                 </Button>
+                              </div>
+                              {user.username !== "Admin" && (
+                                <div className="flex items-center">
+                                  <Button 
+                                    variant="ghost" 
+                                    className="text-red-400 hover:text-red-300 w-24 text-center" 
+                                    onClick={() => handleOpenDeleteModal(user)}
+                                  >
+                                    Löschen
+                                  </Button>
+                                </div>
                               )}
                             </td>
                           </tr>
@@ -424,21 +428,25 @@ export default function AdminDashboard() {
                                 </SelectContent>
                               </Select>
                             </td>
-                            <td className="px-4 text-right">
-                              <Button 
-                                variant="ghost" 
-                                className="text-[#00d2ff] hover:text-[#c4f6ff] mr-3"
-                                onClick={() => handleViewApplication(application)}
-                              >
-                                Ansehen
-                              </Button>
-                              <Button 
-                                variant="ghost" 
-                                className="text-red-400 hover:text-red-300"
-                                onClick={() => handleDeleteApplication(application.id)}
-                              >
-                                Löschen
-                              </Button>
+                            <td className="px-4 flex justify-end space-x-2">
+                              <div className="flex items-center">
+                                <Button 
+                                  variant="ghost" 
+                                  className="text-[#00d2ff] hover:text-[#c4f6ff] w-24 text-center"
+                                  onClick={() => handleViewApplication(application)}
+                                >
+                                  Ansehen
+                                </Button>
+                              </div>
+                              <div className="flex items-center">
+                                <Button 
+                                  variant="ghost" 
+                                  className="text-red-400 hover:text-red-300 w-24 text-center"
+                                  onClick={() => handleDeleteApplication(application.id)}
+                                >
+                                  Löschen
+                                </Button>
+                              </div>
                             </td>
                           </tr>
                         ))
