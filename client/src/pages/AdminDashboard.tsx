@@ -256,11 +256,11 @@ export default function AdminDashboard() {
       <div className="futuristic-panel w-full relative">
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[rgba(0,210,255,0.5)] to-transparent"></div>
         
-        <div className="flex flex-col lg:flex-row">
+        <div className="flex flex-col lg:flex-row bg-[#0c1a2e]">
           {/* Linke Navigationsleiste */}
-          <div className="lg:w-64 border-r border-[#00669c]/30">
+          <div className="lg:w-64 border-r border-[#00669c]/30 bg-[#081018]">
             <div className="p-3">
-              <div className="mb-4 text-center">
+              <div className="mb-8 text-center pt-4">
                 <div className="text-[#00d2ff] font-bold text-base">KONTROLLPANEL</div>
               </div>
               <Tabs 
@@ -273,13 +273,13 @@ export default function AdminDashboard() {
                 <TabsList className="w-full flex flex-col space-tabs">
                   <TabsTrigger 
                     value="users" 
-                    className="flex-1 justify-center text-center space-tab py-4 px-4 text-base font-bold mb-2 border border-[#00669c]/60 rounded-sm data-[state=active]:border-[#00d2ff] data-[state=active]:bg-[#081018]"
+                    className="flex-1 justify-center text-center space-tab py-4 px-4 text-base font-bold mb-4 border border-[#00669c]/60 rounded-sm data-[state=active]:border-[#00d2ff] data-[state=active]:bg-[#0c1a2e]"
                   >
                     Benutzerverwaltung
                   </TabsTrigger>
                   <TabsTrigger 
                     value="applications" 
-                    className="flex-1 justify-center text-center space-tab py-4 px-4 text-base font-bold border border-[#00669c]/60 rounded-sm data-[state=active]:border-[#00d2ff] data-[state=active]:bg-[#081018]"
+                    className="flex-1 justify-center text-center space-tab py-4 px-4 text-base font-bold border border-[#00669c]/60 rounded-sm data-[state=active]:border-[#00d2ff] data-[state=active]:bg-[#0c1a2e]"
                   >
                     Aktuelle Bewerbungen
                   </TabsTrigger>
