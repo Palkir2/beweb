@@ -193,6 +193,99 @@
   border-image-slice: 1;
 }
 
+/* Raumschiff-Tabellen und Dashboard-Elemente */
+.space-table {
+  @apply w-full border-collapse;
+}
+
+.space-table thead {
+  @apply bg-[#081018];
+}
+
+.space-table th {
+  @apply px-6 py-3 text-left text-xs font-medium text-[#00d2ff] uppercase tracking-wider;
+}
+
+.space-table th:last-child {
+  @apply text-right;
+}
+
+.space-table tbody {
+  @apply divide-y divide-[#00669c]/20;
+}
+
+.space-table tbody tr {
+  @apply hover:bg-[#081018]/50 transition-colors duration-150;
+}
+
+.space-table td {
+  @apply px-6 py-4 whitespace-nowrap text-sm text-[#89c4d9];
+}
+
+.space-table td:first-child {
+  @apply font-medium text-[#c4f6ff];
+}
+
+.space-table td:last-child {
+  @apply text-right;
+}
+
+.space-dialog-content {
+  @apply bg-[#081018] border-[#00669c] text-[#c4f6ff] p-6 relative;
+  box-shadow: 0 0 20px rgba(0, 150, 255, 0.15);
+}
+
+.space-dialog-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.8), transparent);
+}
+
+.space-dialog-content::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.5), transparent);
+}
+
+.space-field {
+  @apply bg-[#0c1a2e] border border-[#00669c] p-4 rounded-sm;
+}
+
+.space-field-label {
+  @apply text-sm font-medium text-[#00d2ff] mb-1;
+}
+
+.space-field-value {
+  @apply text-[#c4f6ff];
+}
+
+.space-tabs {
+  @apply bg-[#081018] border border-[#00669c] p-1 glow-border;
+}
+
+.space-tab {
+  @apply text-[#89c4d9];
+}
+.space-tab[data-state="active"] {
+  @apply text-[#00d2ff] bg-[#0c1a2e] glow-border;
+}
+
+.space-select {
+  @apply bg-[#081018] border-[#00669c] text-[#c4f6ff] w-full;
+}
+
+.space-select-item {
+  @apply focus:bg-[#0c1a2e] focus:text-[#00d2ff];
+}
+
 /* Raumschiff-Interface Elemente */
 .interface-scanline {
   position: relative;
