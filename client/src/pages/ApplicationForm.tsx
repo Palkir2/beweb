@@ -316,7 +316,7 @@ export default function ApplicationForm() {
           </form>
         </CardContent>
         <CardFooter className="text-sm text-gray-500 text-center">
-          Ihre Daten werden gemäß unserer Datenschutzerklärung verarbeitet
+          Ihre Daten werden gemäß unserer <a href="https://palkirzwei.de/datenschutz" target="_blank" rel="noopener noreferrer" className="text-[#00d2ff] hover:text-[#c4f6ff] border-b border-[#00669c] pb-px hover:border-[#00d2ff] transition-colors">Datenschutzerklärung</a> verarbeitet
         </CardFooter>
       </Card>
     </UserLayout>
