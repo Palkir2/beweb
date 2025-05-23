@@ -176,6 +176,29 @@ export default function AdminDashboard() {
       }" gesetzt.`
     });
   };
+  
+  const handleDeleteApplication = (applicationId: number) => {
+    // Lösche die Bewerbung aus der Liste
+    setApplications(applications.filter(app => app.id !== applicationId));
+    
+    // Falls es sich um die Bewerbung handelt, die im localStorage gespeichert ist, lösche auch diese
+    const storedApp = localStorage.getItem('userApplication');
+    if (storedApp) {
+      try {
+        const app = JSON.parse(storedApp);
+        if (app.id === applicationId) {
+          localStorage.removeItem('userApplication');
+        }
+      } catch (e) {
+        console.error("Fehler beim Löschen der gespeicherten Bewerbung", e);
+      }
+    }
+    
+    toast({
+      title: "Bewerbung gelöscht",
+      description: "Die Bewerbung wurde erfolgreich gelöscht."
+    });
+  };
 
   const handleSaveUser = (userData: InsertUser & { id?: number }) => {
     if (userData.id) {
@@ -404,10 +427,17 @@ export default function AdminDashboard() {
                             <td className="px-4 text-right">
                               <Button 
                                 variant="ghost" 
-                                className="text-[#00d2ff] hover:text-[#c4f6ff]"
+                                className="text-[#00d2ff] hover:text-[#c4f6ff] mr-3"
                                 onClick={() => handleViewApplication(application)}
                               >
                                 Ansehen
+                              </Button>
+                              <Button 
+                                variant="ghost" 
+                                className="text-red-400 hover:text-red-300"
+                                onClick={() => handleDeleteApplication(application.id)}
+                              >
+                                Löschen
                               </Button>
                             </td>
                           </tr>
