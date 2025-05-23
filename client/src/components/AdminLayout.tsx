@@ -63,7 +63,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#00d2ff]/30 to-transparent"></div>
         <div className="futuristic-panel py-3">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-[#48b1d9] text-sm">
-            KOMMANDO-PROTOKOLL: RS-{new Date().getFullYear()}-KPTNS-CCKPT
+            powered by Sora
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[rgba(0,210,255,0.6)] to-transparent"></div>

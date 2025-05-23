@@ -60,10 +60,8 @@ export default function Login() {
             <div className="text-center mb-8">
               <div className="flex justify-center mb-4">
                 {/* Futuristisches Logo/Icon */}
-                <div className="hexagon-shape w-16 h-16 flex items-center justify-center pulse-element">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#00d2ff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 0 1 0 18" />
-                  </svg>
+                <div className="hexagon-shape w-20 h-20 flex items-center justify-center pulse-element">
+                  <div className="text-[#00d2ff] font-bold text-xl">PK-II</div>
                 </div>
               </div>
               <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] to-[#48b1d9] mb-1">RAUMSCHIFF-TERMINAL</h1>
