@@ -347,55 +347,56 @@ export default function AdminDashboard() {
           ) : (
             <div>
               <div className="mb-6">
-                <h2 className="text-xl font-semibold text-gray-900">Aktuelle Bewerbungen</h2>
+                <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] to-[#48b1d9]">Aktuelle Bewerbungen</h2>
               </div>
               
-              {/* Application Table */}
-              <div className="bg-white shadow overflow-hidden sm:rounded-md">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+              {/* Application Table im Raumschiff-Design */}
+              <div className="futuristic-panel p-4 relative overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[rgba(0,210,255,0.5)] to-transparent"></div>
+                <table className="space-table">
+                  <thead>
                     <tr>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bewerber</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Betreff</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Eingereicht am</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                      <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Aktionen</th>
+                      <th>Bewerber</th>
+                      <th>Betreff</th>
+                      <th>Eingereicht am</th>
+                      <th>Status</th>
+                      <th>Aktionen</th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody>
                     {applications && applications.length > 0 ? (
                       applications.map((application) => (
                         <tr key={application.id}>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          <td>
                             {application.fullName}
                           </td>
-                          <td className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">
+                          <td className="max-w-xs truncate">
                             {application.title}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td>
                             {formatDate(application.submittedAt)}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
+                          <td>
                             <Select
                               defaultValue={application.status}
                               onValueChange={(value: "pending" | "approved" | "rejected") => 
                                 handleUpdateApplicationStatus(application.id, value)
                               }
                             >
-                              <SelectTrigger className="w-[140px]">
+                              <SelectTrigger className="w-[140px] bg-[#081018] border-[#00669c] text-[#c4f6ff]">
                                 <SelectValue />
                               </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="pending">In Bearbeitung</SelectItem>
-                                <SelectItem value="approved">Angenommen</SelectItem>
-                                <SelectItem value="rejected">Abgelehnt</SelectItem>
+                              <SelectContent className="bg-[#081018] border-[#00669c] text-[#c4f6ff]">
+                                <SelectItem value="pending" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">In Bearbeitung</SelectItem>
+                                <SelectItem value="approved" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">Angenommen</SelectItem>
+                                <SelectItem value="rejected" className="focus:bg-[#0c1a2e] focus:text-[#00d2ff]">Abgelehnt</SelectItem>
                               </SelectContent>
                             </Select>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <td>
                             <Button 
                               variant="ghost" 
-                              className="text-primary hover:text-primary-dark"
+                              className="text-[#00d2ff] hover:text-[#c4f6ff]"
                               onClick={() => handleViewApplication(application)}
                             >
                               Ansehen
@@ -405,11 +406,12 @@ export default function AdminDashboard() {
                       ))
                     ) : (
                       <tr>
-                        <td colSpan={5} className="px-6 py-4 text-center">Keine Bewerbungen gefunden</td>
+                        <td colSpan={5} className="text-center">Keine Bewerbungen gefunden</td>
                       </tr>
                     )}
                   </tbody>
                 </table>
+                <div className="absolute bottom-0 left-10 right-10 h-[1px] bg-gradient-to-r from-transparent via-[rgba(0,210,255,0.3)] to-transparent"></div>
               </div>
             </div>
           )}
