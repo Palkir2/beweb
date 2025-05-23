@@ -260,6 +260,9 @@ export default function AdminDashboard() {
           {/* Linke Navigationsleiste */}
           <div className="lg:w-64 border-r border-[#00669c]/30">
             <div className="p-3">
+              <div className="mb-4 text-center">
+                <div className="text-[#00d2ff] font-semibold text-sm">KONTROLLPANEL</div>
+              </div>
               <Tabs 
                 defaultValue="users" 
                 orientation="vertical" 
