@@ -33,10 +33,18 @@ export function UserLayout({ children }: UserLayoutProps) {
         <div className="futuristic-panel px-4 py-3">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <div className="flex items-center space-x-3">
-              <div className="hexagon-shape w-8 h-8 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#00d2ff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 0 1 0 18" />
-                </svg>
+              <div className="w-12 h-12 relative pulse-element">
+                {/* Schiff-Logo mit futuristischem Effekt */}
+                <div className="absolute inset-0 rounded-full glow-border overflow-hidden">
+                  <div className="w-full h-full relative">
+                    <img 
+                      src="https://palkirzwei.de/wp-content/uploads/2024/05/cropped-PKZ_Logo_PNG_B_1280.png" 
+                      alt="Raumschiff Logo" 
+                      className="w-full h-full object-cover brightness-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-bl from-[#081018]/0 via-[#00d2ff]/5 to-[#081018]/0"></div>
+                  </div>
+                </div>
               </div>
               <h1 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] to-[#48b1d9]">RAUMSCHIFF-TERMINAL</h1>
             </div>
