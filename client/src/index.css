@@ -3,55 +3,55 @@
 @tailwind utilities;
 
 :root {
-  /* Futuristisches Raumschiff-Design */
-  --background: 230 40% 7%;
-  --foreground: 210 100% 95%;
-  --muted: 230 30% 15%;
-  --muted-foreground: 215 20% 65%;
-  --popover: 229 35% 10%;
-  --popover-foreground: 210 100% 95%;
-  --card: 225 30% 12%;
-  --card-foreground: 210 100% 95%;
-  --border: 220 50% 20%;
-  --input: 220 50% 20%;
-  --primary: 194 100% 50%;
-  --primary-dark: 194 100% 35%;
-  --primary-light: 194 100% 65%;
-  --primary-foreground: 220 10% 98%;
-  --secondary: 260 80% 60%;
-  --secondary-foreground: 220 10% 98%;
-  --accent: 140 80% 60%;
-  --accent-foreground: 210 40% 98%;
+  /* Futuristisches Raumschiff-Design basierend auf dem Referenzbild */
+  --background: 222 30% 5%;
+  --foreground: 196 100% 95%;
+  --muted: 222 25% 10%;
+  --muted-foreground: 196 20% 65%;
+  --popover: 222 35% 8%;
+  --popover-foreground: 196 100% 95%;
+  --card: 222 25% 10%;
+  --card-foreground: 196 100% 95%;
+  --border: 196 80% 40%;
+  --input: 222 20% 15%;
+  --primary: 196 100% 50%;
+  --primary-dark: 196 100% 35%;
+  --primary-light: 196 100% 70%;
+  --primary-foreground: 222 10% 5%;
+  --secondary: 222 40% 20%;
+  --secondary-foreground: 196 100% 95%;
+  --accent: 196 90% 60%;
+  --accent-foreground: 222 10% 5%;
   --destructive: 0 100% 60%;
-  --destructive-foreground: 210 40% 98%;
-  --ring: 194 80% 40%;
-  --radius: 0.375rem;
+  --destructive-foreground: 222 10% 5%;
+  --ring: 196 80% 40%;
+  --radius: 0.125rem;
 }
 
 /* Wir verwenden direkt das dunkle Raumschiff-Theme */
 .dark {
-  --background: 230 40% 7%;
-  --foreground: 210 100% 95%;
-  --muted: 230 30% 15%;
-  --muted-foreground: 215 20% 65%;
-  --popover: 229 35% 10%;
-  --popover-foreground: 210 100% 95%;
-  --card: 225 30% 12%;
-  --card-foreground: 210 100% 95%;
-  --border: 220 50% 20%;
-  --input: 220 50% 20%;
-  --primary: 194 100% 50%;
-  --primary-dark: 194 100% 35%;
-  --primary-light: 194 100% 65%;
-  --primary-foreground: 220 10% 98%;
-  --secondary: 260 80% 60%;
-  --secondary-foreground: 220 10% 98%;
-  --accent: 140 80% 60%;
-  --accent-foreground: 210 40% 98%;
+  --background: 222 30% 5%;
+  --foreground: 196 100% 95%;
+  --muted: 222 25% 10%;
+  --muted-foreground: 196 20% 65%;
+  --popover: 222 35% 8%;
+  --popover-foreground: 196 100% 95%;
+  --card: 222 25% 10%;
+  --card-foreground: 196 100% 95%;
+  --border: 196 80% 40%;
+  --input: 222 20% 15%;
+  --primary: 196 100% 50%;
+  --primary-dark: 196 100% 35%;
+  --primary-light: 196 100% 70%;
+  --primary-foreground: 222 10% 5%;
+  --secondary: 222 40% 20%;
+  --secondary-foreground: 196 100% 95%;
+  --accent: 196 90% 60%;
+  --accent-foreground: 222 10% 5%;
   --destructive: 0 100% 60%;
-  --destructive-foreground: 210 40% 98%;
-  --ring: 194 80% 40%;
-  --radius: 0.375rem;
+  --destructive-foreground: 222 10% 5%;
+  --ring: 196 80% 40%;
+  --radius: 0.125rem;
 }
 
 .login-container {
@@ -90,38 +90,107 @@
   }
 }
 
-/* Futuristische Komponenten */
+/* Futuristische Komponenten basierend auf dem Raumschiff-Cockpit */
 .futuristic-panel {
-  @apply bg-gradient-to-br from-[#0a1628] to-[#0c1a2e] rounded-md border border-[#1a2942] shadow-lg;
-  box-shadow: 0 4px 20px rgba(0, 150, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  @apply rounded-md shadow-lg relative overflow-hidden;
+  background: linear-gradient(135deg, rgba(10, 15, 25, 0.9), rgba(15, 20, 30, 0.95));
+  border: 1px solid rgba(0, 150, 255, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 190, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.futuristic-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.8), transparent);
+}
+
+.futuristic-panel::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.3), transparent);
 }
 
 .futuristic-card {
-  @apply rounded-md border border-[#1a2942];
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(15, 25, 45, 0.9));
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  @apply rounded-sm relative overflow-hidden;
+  background: linear-gradient(135deg, rgba(8, 15, 25, 0.8), rgba(10, 20, 30, 0.9));
+  border: 1px solid rgba(0, 150, 255, 0.3);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(0, 150, 255, 0.1);
   backdrop-filter: blur(10px);
+}
+
+.futuristic-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.6), transparent);
+}
+
+.futuristic-card-inner {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+}
+
+/* Hexagonale Form-Elemente */
+.hexagon-shape {
+  clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+  background: linear-gradient(135deg, rgba(0, 140, 255, 0.2), rgba(0, 200, 255, 0.1));
+  border: 1px solid rgba(0, 200, 255, 0.3);
 }
 
 .futuristic-btn {
   @apply relative overflow-hidden transition-all duration-200;
-  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-dark)));
+  background: linear-gradient(90deg, rgb(0, 148, 198), rgb(0, 120, 180));
+  border: 1px solid rgba(0, 210, 255, 0.5);
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.2), inset 0 0 2px rgba(255, 255, 255, 0.3);
+  clip-path: polygon(5% 0%, 95% 0%, 100% 25%, 100% 75%, 95% 100%, 5% 100%, 0% 75%, 0% 25%);
 }
 
 .futuristic-btn::after {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-  transform: rotate(30deg);
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0), 
+    rgba(255, 255, 255, 0.2), 
+    rgba(255, 255, 255, 0));
+  transform: skewX(-25deg);
   transition: transform 0.5s;
 }
 
 .futuristic-btn:hover::after {
-  transform: rotate(30deg) translate(10%, 10%);
+  transform: skewX(-25deg) translateX(200%);
+}
+
+/* Leuchtende Elemente */
+.glow-border {
+  box-shadow: 0 0 10px rgba(0, 210, 255, 0.5), inset 0 0 5px rgba(0, 210, 255, 0.2);
+  border: 1px solid rgba(0, 210, 255, 0.6);
+}
+
+.cockpit-border {
+  position: relative;
+  border: 2px solid transparent;
+  border-image: linear-gradient(90deg, 
+    rgba(0, 210, 255, 0), 
+    rgba(0, 210, 255, 0.6) 50%, 
+    rgba(0, 210, 255, 0)
+  );
+  border-image-slice: 1;
 }
 
 /* Raumschiff-Interface Elemente */
