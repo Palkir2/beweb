@@ -353,14 +353,14 @@ export default function AdminDashboard() {
               {/* Application Table im Raumschiff-Design */}
               <div className="futuristic-panel p-4 relative overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[rgba(0,210,255,0.5)] to-transparent"></div>
-                <table className="space-table">
+                <table className="space-table w-full">
                   <thead>
                     <tr>
-                      <th>Bewerber</th>
-                      <th>Betreff</th>
-                      <th>Eingereicht am</th>
-                      <th>Status</th>
-                      <th>Aktionen</th>
+                      <th className="w-1/5 text-left px-4">Bewerber</th>
+                      <th className="w-1/5 text-left px-4">Betreff</th>
+                      <th className="w-1/5 text-left px-4">Eingereicht am</th>
+                      <th className="w-1/5 text-left px-4">Status</th>
+                      <th className="w-1/5 text-right px-4">Aktionen</th>
                     </tr>
                   </thead>
                   <tbody>

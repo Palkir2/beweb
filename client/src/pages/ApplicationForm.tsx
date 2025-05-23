@@ -305,15 +305,18 @@ export default function ApplicationForm() {
             
             <Button 
               type="submit" 
-              className="w-full bg-primary hover:bg-primary-dark"
+              className="w-full futuristic-btn text-white border-[#00669c] bg-gradient-to-r from-[#081018] to-[#0c1a2e] hover:from-[#0c1a2e] hover:to-[#1a3048] relative overflow-hidden group"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Wird eingereicht..." : "Bewerbung einreichen"}
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(0,210,255,0.2)] to-transparent w-[200%] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></span>
+              <span className="relative z-10">
+                {isSubmitting ? "Wird eingereicht..." : "Bewerbung einreichen"}
+              </span>
             </Button>
           </form>
         </CardContent>
         <CardFooter className="text-sm text-gray-500 text-center">
-          Ihre Daten werden gemäß unserer Datenschutzerklärung verarbeitet
+          Ihre Daten werden gemäß unserer <a href="https://palkirzwei.de/datenschutz" target="_blank" rel="noopener noreferrer" className="text-[#00d2ff] hover:text-[#c4f6ff] border-b border-[#00669c] pb-px hover:border-[#00d2ff] transition-colors">Datenschutzerklärung</a> verarbeitet
         </CardFooter>
       </Card>
     </UserLayout>
