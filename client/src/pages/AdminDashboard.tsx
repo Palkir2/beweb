@@ -348,8 +348,8 @@ export default function AdminDashboard() {
                             <td className="px-4">
                               {getStatusBadge(user.status)}
                             </td>
-                            <td className="px-4 flex justify-end space-x-2">
-                              <div className="flex items-center">
+                            <td className="px-4 text-right">
+                              <div className="flex flex-col items-end space-y-2">
                                 <Button 
                                   variant="ghost" 
                                   className="text-[#00d2ff] hover:text-[#c4f6ff] w-24 text-center" 
@@ -357,9 +357,7 @@ export default function AdminDashboard() {
                                 >
                                   Bearbeiten
                                 </Button>
-                              </div>
-                              {user.username !== "Admin" && (
-                                <div className="flex items-center">
+                                {user.username !== "Admin" && (
                                   <Button 
                                     variant="ghost" 
                                     className="text-red-400 hover:text-red-300 w-24 text-center" 
@@ -367,8 +365,8 @@ export default function AdminDashboard() {
                                   >
                                     Löschen
                                   </Button>
-                                </div>
-                              )}
+                                )}
+                              </div>
                             </td>
                           </tr>
                         ))
@@ -428,8 +426,8 @@ export default function AdminDashboard() {
                                 </SelectContent>
                               </Select>
                             </td>
-                            <td className="px-4 flex justify-end space-x-2">
-                              <div className="flex items-center">
+                            <td className="px-4 text-right">
+                              <div className="flex flex-col items-end space-y-2">
                                 <Button 
                                   variant="ghost" 
                                   className="text-[#00d2ff] hover:text-[#c4f6ff] w-24 text-center"
@@ -437,8 +435,6 @@ export default function AdminDashboard() {
                                 >
                                   Ansehen
                                 </Button>
-                              </div>
-                              <div className="flex items-center">
                                 <Button 
                                   variant="ghost" 
                                   className="text-red-400 hover:text-red-300 w-24 text-center"
