@@ -289,8 +289,7 @@ export default function AdminDashboard() {
           <div className="flex-1 p-4">
             {activeTab === "users" ? (
               <div>
-                <div className="mb-6 flex justify-between items-center">
-                  <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] to-[#48b1d9]">Benutzerverwaltung</h2>
+                <div className="mb-6 flex justify-end">
                   <Button 
                     onClick={handleOpenAddUserModal} 
                     className="futuristic-btn text-white"
@@ -354,7 +353,7 @@ export default function AdminDashboard() {
             ) : (
               <div>
                 <div className="mb-6">
-                  <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00d2ff] to-[#48b1d9]">Aktuelle Bewerbungen</h2>
+                  {/* Überschrift entfernt, da sie bereits in den Tabs angezeigt wird */}
                 </div>
                 
                 <div className="overflow-hidden">
