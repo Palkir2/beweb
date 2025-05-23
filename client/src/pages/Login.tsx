@@ -173,6 +173,11 @@ export default function Login() {
         
         {/* Leuchtender Rahmen unten */}
         <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[rgba(0,210,255,0.5)] to-transparent"></div>
+        
+        {/* Sora Footer */}
+        <div className="absolute bottom-4 left-0 right-0 text-center text-[#48b1d9] text-xs">
+          powered by Sora
+        </div>
       </div>
     </div>
   );

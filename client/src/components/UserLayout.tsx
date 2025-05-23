@@ -86,7 +86,7 @@ export function UserLayout({ children }: UserLayoutProps) {
         <div className="futuristic-panel py-3">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="text-[#48b1d9] text-sm">
-              SYSTEM-ID: RS-{new Date().getFullYear()}-BRWRBNGSPRJKT
+              powered by Sora
             </div>
           </div>
         </div>
