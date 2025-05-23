@@ -256,35 +256,35 @@ export default function AdminDashboard() {
       <div className="futuristic-panel w-full relative">
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[rgba(0,210,255,0.5)] to-transparent"></div>
         
-        <div className="flex flex-col lg:flex-row bg-[#0c1a2e]">
-          {/* Linke Navigationsleiste */}
-          <div className="lg:w-64 border-r border-[#00669c]/30 bg-[#081018]">
+        <div className="flex flex-col lg:flex-row">
+          {/* Linke Navigationsleiste - komplett neu gestaltet */}
+          <div className="lg:w-64 border-r border-[#00669c]/30 bg-[#060c14]">
             <div className="p-3">
-              <div className="mb-16 text-center pt-6">
-                <div className="text-[#00d2ff] font-bold text-base">KONTROLLPANEL</div>
+              <div className="mt-4 mb-16 text-center pt-6">
+                <div className="text-[#00d2ff] font-bold text-base tracking-wider">KONTROLLPANEL</div>
               </div>
-              <Tabs 
-                defaultValue="users" 
-                orientation="vertical" 
-                className="w-full"
-                value={activeTab}
-                onValueChange={setActiveTab}
-              >
-                <TabsList className="w-full flex flex-col space-tabs">
-                  <TabsTrigger 
-                    value="users" 
-                    className="flex-1 justify-center text-center space-tab py-4 px-4 text-base font-bold mb-4 border border-[#00669c]/60 rounded-sm data-[state=active]:border-[#00d2ff] data-[state=active]:bg-[#0c1a2e]"
-                  >
-                    Benutzerverwaltung
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="applications" 
-                    className="flex-1 justify-center text-center space-tab py-4 px-4 text-base font-bold border border-[#00669c]/60 rounded-sm data-[state=active]:border-[#00d2ff] data-[state=active]:bg-[#0c1a2e]"
-                  >
-                    Aktuelle Bewerbungen
-                  </TabsTrigger>
-                </TabsList>
-              </Tabs>
+              <div className="flex flex-col space-y-6">
+                <div 
+                  onClick={() => setActiveTab("users")}
+                  className={`cursor-pointer p-4 text-base font-bold text-center transition-all duration-300 hover:shadow-[0_0_6px_rgba(0,150,255,0.2)] ${
+                    activeTab === "users" 
+                      ? "bg-[#0c1a2e] text-[#00d2ff] border-[#00d2ff] border" 
+                      : "text-[#89c4d9] border border-transparent hover:border-[#00669c]/50"
+                  }`}
+                >
+                  Benutzerverwaltung
+                </div>
+                <div
+                  onClick={() => setActiveTab("applications")}
+                  className={`cursor-pointer p-4 text-base font-bold text-center transition-all duration-300 hover:shadow-[0_0_6px_rgba(0,150,255,0.2)] ${
+                    activeTab === "applications" 
+                      ? "bg-[#0c1a2e] text-[#00d2ff] border-[#00d2ff] border" 
+                      : "text-[#89c4d9] border border-transparent hover:border-[#00669c]/50"
+                  }`}
+                >
+                  Aktuelle Bewerbungen
+                </div>
+              </div>
             </div>
           </div>
           
