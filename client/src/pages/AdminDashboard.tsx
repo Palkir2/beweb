@@ -261,7 +261,7 @@ export default function AdminDashboard() {
           <div className="lg:w-64 border-r border-[#00669c]/30">
             <div className="p-3">
               <div className="mb-4 text-center">
-                <div className="text-[#00d2ff] font-semibold text-sm">KONTROLLPANEL</div>
+                <div className="text-[#00d2ff] font-bold text-base">KONTROLLPANEL</div>
               </div>
               <Tabs 
                 defaultValue="users" 
@@ -273,13 +273,13 @@ export default function AdminDashboard() {
                 <TabsList className="w-full flex flex-col space-tabs">
                   <TabsTrigger 
                     value="users" 
-                    className="flex-1 justify-start text-left space-tab py-4 px-4 text-base mb-1 border-l-2 border-l-transparent data-[state=active]:border-l-[#00d2ff]"
+                    className="flex-1 justify-center text-center space-tab py-4 px-4 text-base font-bold mb-2 border border-[#00669c]/60 rounded-sm data-[state=active]:border-[#00d2ff] data-[state=active]:bg-[#081018]"
                   >
                     Benutzerverwaltung
                   </TabsTrigger>
                   <TabsTrigger 
                     value="applications" 
-                    className="flex-1 justify-start text-left space-tab py-4 px-4 text-base border-l-2 border-l-transparent data-[state=active]:border-l-[#00d2ff]"
+                    className="flex-1 justify-center text-center space-tab py-4 px-4 text-base font-bold border border-[#00669c]/60 rounded-sm data-[state=active]:border-[#00d2ff] data-[state=active]:bg-[#081018]"
                   >
                     Aktuelle Bewerbungen
                   </TabsTrigger>
@@ -292,7 +292,8 @@ export default function AdminDashboard() {
           <div className="flex-1 p-4">
             {activeTab === "users" ? (
               <div>
-                <div className="mb-6 flex justify-end">
+                <div className="mb-6 flex justify-between items-center">
+                  <h2 className="text-xl font-bold text-[#00d2ff] text-center">BENUTZERLISTE</h2>
                   <Button 
                     onClick={handleOpenAddUserModal} 
                     className="futuristic-btn text-white"
@@ -355,8 +356,8 @@ export default function AdminDashboard() {
               </div>
             ) : (
               <div>
-                <div className="mb-6">
-                  {/* Überschrift entfernt, da sie bereits in den Tabs angezeigt wird */}
+                <div className="mb-6 flex justify-center">
+                  <h2 className="text-xl font-bold text-[#00d2ff] text-center">BEWERBUNGSLISTE</h2>
                 </div>
                 
                 <div className="overflow-hidden">
