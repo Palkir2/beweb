@@ -263,11 +263,11 @@ export default function AdminDashboard() {
               value={activeTab}
               onValueChange={setActiveTab}
             >
-              <TabsList className="w-full flex flex-row lg:flex-col space-tabs">
-                <TabsTrigger value="users" className="flex-1 lg:justify-start text-left space-tab py-4 px-3 text-base">
+              <TabsList className="w-full flex flex-col space-tabs">
+                <TabsTrigger value="users" className="flex-1 justify-start text-left space-tab py-4 px-6 text-base mb-1 border-l-2 border-l-transparent data-[state=active]:border-l-[#00d2ff]">
                   Benutzerverwaltung
                 </TabsTrigger>
-                <TabsTrigger value="applications" className="flex-1 lg:justify-start text-left space-tab py-4 px-3 text-base">
+                <TabsTrigger value="applications" className="flex-1 justify-start text-left space-tab py-4 px-6 text-base border-l-2 border-l-transparent data-[state=active]:border-l-[#00d2ff]">
                   Aktuelle Bewerbungen
                 </TabsTrigger>
               </TabsList>
@@ -292,29 +292,29 @@ export default function AdminDashboard() {
               {/* User Table im Raumschiff-Design */}
               <div className="futuristic-panel p-4 relative overflow-hidden mb-8">
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[rgba(0,210,255,0.5)] to-transparent"></div>
-                <table className="space-table">
+                <table className="space-table w-full">
                   <thead>
                     <tr>
-                      <th>Benutzername</th>
-                      <th>E-Mail</th>
-                      <th>Rolle</th>
-                      <th>Status</th>
-                      <th>Aktionen</th>
+                      <th className="w-1/5 text-left px-4">Benutzername</th>
+                      <th className="w-1/5 text-left px-4">E-Mail</th>
+                      <th className="w-1/5 text-left px-4">Rolle</th>
+                      <th className="w-1/5 text-left px-4">Status</th>
+                      <th className="w-1/5 text-right px-4">Aktionen</th>
                     </tr>
                   </thead>
                   <tbody>
                     {users && users.length > 0 ? (
                       users.map((user) => (
                         <tr key={user.id}>
-                          <td>{user.username}</td>
-                          <td>{user.email}</td>
-                          <td>
+                          <td className="px-4">{user.username}</td>
+                          <td className="px-4">{user.email}</td>
+                          <td className="px-4">
                             {user.role === "admin" ? "Administrator" : "Benutzer"}
                           </td>
-                          <td>
+                          <td className="px-4">
                             {getStatusBadge(user.status)}
                           </td>
-                          <td>
+                          <td className="px-4 text-right">
                             <Button 
                               variant="ghost" 
                               className="text-[#00d2ff] hover:text-[#c4f6ff] mr-3" 

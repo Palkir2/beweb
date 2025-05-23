@@ -114,21 +114,7 @@ export default function Login() {
               </div>
             </form>
             
-            <div className="mt-8">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-[#00669c]"></div>
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 text-[#48b1d9] bg-[#081018]">ADMIN-ZUGANGSINFORMATIONEN</span>
-                </div>
-              </div>
-              
-              <div className="mt-4 text-center text-xs text-[#c4f6ff] p-3 border glow-border bg-[#081018] rounded-sm">
-                <p>BESATZUNGSMITGLIED-ID: <span className="font-mono text-[#00d2ff]">Admin</span></p>
-                <p>SICHERHEITSCODE: <span className="font-mono text-[#00d2ff]">123456</span></p>
-              </div>
-            </div>
+            {/* Admin-Informationen wurden entfernt */}
             
             {/* Dekorative Elemente wie im Cockpit-Bild */}
             <div className="mt-6 grid grid-cols-3 gap-2">
